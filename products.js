@@ -4,6 +4,8 @@ state.products = [];
 let productButton = document.getElementById("findProductButton");
 let productInput = document.getElementById("productIdInput");
 let productOutput = document.getElementById("productsDiv")
+let recipeButton = document.getElementById("recipeButton");
+let recipeSection = document.getElementById("recipeSection");
 
 async function findProductHandler() {
   let productBarcode = productInput.value;
@@ -26,3 +28,12 @@ function renderProducts() {
 }
 
 productButton.addEventListener("click", findProductHandler);
+
+async function handleGetRecipe(){
+  let prompt = createRecipePrompt(state.products);
+  console.log(prompt);
+  let recipe = await fetchAI(prompt);
+  console.log(recipe);
+  recipeSection.innerText = recipe;
+}
+recipeButton.addEventListener("click", handleGetRecipe);
