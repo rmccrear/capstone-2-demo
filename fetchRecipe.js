@@ -1,5 +1,4 @@
 let inferenceEndpoint = "https://api-inference.huggingface.co/models/google/gemma-1.1-2b-it";
-let inferenceToken = "";
 
 function createRecipePrompt(products) {
   let list = "";
@@ -14,7 +13,8 @@ function createRecipePrompt(products) {
   return `Create a recipe for ${list}`;
 }
 
-async function fetchAI(prompt){
+async function fetchAI(prompt, inferenceToken){
+  console.log(inferenceToken)
   let payload = {
     "inputs": prompt
   }

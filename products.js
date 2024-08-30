@@ -1,5 +1,6 @@
 let state = {};
 state.products = [];
+state.token = localStorage.getItem("token");
 
 let productButton = document.getElementById("findProductButton");
 let productInput = document.getElementById("productIdInput");
@@ -32,7 +33,7 @@ productButton.addEventListener("click", findProductHandler);
 async function handleGetRecipe(){
   let prompt = createRecipePrompt(state.products);
   console.log(prompt);
-  let recipe = await fetchAI(prompt);
+  let recipe = await fetchAI(prompt, state.token);
   console.log(recipe);
   recipeSection.innerText = recipe;
 }
