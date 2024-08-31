@@ -1,0 +1,25 @@
+.hero-img {
+  width: 100%;
+  position: absolute;
+  top: 50px;
+}
+
+.hero-text-container {
+  position: absolute;
+  margin-left: 1em;
+  top: 65vh;
+  color: wheat;
+  font-family: 'Times New Roman', serif;
+}
+
+.hero-title {
+  color: #DE541E;
+}
+
+header.hero {
+  position: relative;
+  height: 100vh;
+  overflow-y: hidden;
+  background-image: linear-gradient(45deg, rgba(0, 0, 0, 1.00), rgba(0,0,0,0.3), rgba(0, 0, 0, 0.0)), url("./img/_a6262032-ce2d-499e-a7e8-efc752f5e3d2.jpeg");
+  background-size: cover;
+}
