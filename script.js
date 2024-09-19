@@ -13,6 +13,9 @@ function handleSaveUser(){
   localStorage.setItem("name", username);
   localStorage.setItem("email", email);
   localStorage.setItem("token", token);
+  nameInput.value = '';
+  emailInput.value = '';
+  tokenInput.value = '';
 }
 
 saveButton.addEventListener("click", handleSaveUser);

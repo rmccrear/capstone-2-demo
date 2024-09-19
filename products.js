@@ -31,10 +31,26 @@ function renderProducts() {
 productButton.addEventListener("click", findProductHandler);
 
 async function handleGetRecipe(){
-  let prompt = createRecipePrompt(state.products);
-  console.log(prompt);
-  let recipe = await fetchAI(prompt, state.token);
-  console.log(recipe);
+  let ingredients = '';
+  for (let i=0; i<state.products.length; i++) {
+    ingredients += state.products[i].name;
+    if(i<state.products.length-1) {
+      ingredients += ", "
+    }
+  }
+
+  console.log(ingredients);
+
+  let prompt = `Make a meal with recipes containing only the following ingredients: ${ingredients}`
+
+  console.log(prompt)
+
+  let recipe = await fetchAI2(prompt);
+
+  // let prompt = createRecipePrompt(state.products);
+  // console.log(prompt);
+  // let recipe = await fetchAI(prompt, state.token);
+  // console.log(recipe);
   recipeSection.innerText = recipe;
 }
 recipeButton.addEventListener("click", handleGetRecipe);

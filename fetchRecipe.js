@@ -13,6 +13,32 @@ function createRecipePrompt(products) {
   return `Create a recipe for ${list}`;
 }
 
+async function fetchAI2(prompt) {
+  // let prompt = `Create a recipe for chicken and almond with chia seeds and coca cola`;
+  let token = localStorage.getItem("token");
+  let url = "https://api-inference.huggingface.co/models/microsoft/Phi-3-mini-4k-instruct/v1/chat/completions";
+  let payload = {
+    "model": "microsoft/Phi-3-mini-4k-instruct",
+    "messages": [{"role": "user", "content": prompt}],
+    "max_tokens": 500,
+    "stream": false
+  };
+  let result = await fetch(url, {
+    method: "POST",
+    body: JSON.stringify(payload),
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    }
+  });
+  console.log(result)
+  let data = await result.json();
+  console.log(data);
+  let message = data.choices[0].message.content;
+  console.log(message);
+  return message;
+}
+
 async function fetchAI(prompt, inferenceToken){
   console.log(inferenceToken)
   let payload = {

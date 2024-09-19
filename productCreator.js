@@ -30,7 +30,9 @@ function productCreator(data) {
 }
 
 async function productFetcher(barcode) {
-  let result = await fetch(`https://world.openfoodfacts.org/api/v3/product/${barcode}.json`)
+  let url =`https://world.openfoodfacts.org/api/v3/product/${barcode}.json`;
+  console.log(url);
+  let result = await fetch(url);
   let data = await result.json();
   let product = productCreator(data);
   console.log(product);
