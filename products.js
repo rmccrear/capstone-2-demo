@@ -52,5 +52,16 @@ async function handleGetRecipe(){
   // let recipe = await fetchAI(prompt, state.token);
   // console.log(recipe);
   recipeSection.innerText = recipe;
+
+  // let imgPrompt = "An astronaut riding a horse.";
+
+  // Step 1: create the prompt to generate the image
+  let imgPrompt = `Create an image of this meal: ${recipe}`;
+  // Step 2: fetch the image url
+  let imgUrl = await fetchAIImage(imgPrompt);
+  // Step 3: set the src property of your image tag to the
+  //         url returned by the fetchAIImage function
+  let foodImgTag = document.getElementById("food-img"); 
+  foodImgTag.src = imgUrl;
 }
 recipeButton.addEventListener("click", handleGetRecipe);
