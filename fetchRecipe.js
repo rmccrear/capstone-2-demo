@@ -18,10 +18,10 @@ async function fetchAI2(prompt) {
   let token = localStorage.getItem("token");
   let url = "https://api-inference.huggingface.co/models/microsoft/Phi-3-mini-4k-instruct/v1/chat/completions";
   let payload = {
-    "model": "microsoft/Phi-3-mini-4k-instruct",
-    "messages": [{"role": "user", "content": prompt}],
-    "max_tokens": 500,
-    "stream": false
+    model: "microsoft/Phi-3-mini-4k-instruct",
+    messages: [{"role": "user", "content": prompt}],
+    max_tokens: 500,
+    stream: false
   };
   let result = await fetch(url, {
     method: "POST",
@@ -37,6 +37,29 @@ async function fetchAI2(prompt) {
   let message = data.choices[0].message.content;
   console.log(message);
   return message;
+}
+
+/**
+ *  This function accepts a prompt as a string
+ *  It returns a URL to the blob of the image
+ *  You can use the URL to display the image 
+ *  by setting it to the src of the <img> tag.
+ */
+async function fetchAIImage(prompt) {
+  let payload = {"inputs": prompt};
+  let url = 'https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-dev';
+  let token = localStorage.getItem("token");
+  let result = await fetch(url, {
+    method: "POST",
+    body: JSON.stringify(payload),
+    header: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    }
+  });
+  let blob = await result.blob();
+  let imgUrl = URL.createObjectURL(blob);
+  return imgUrl;
 }
 
 async function fetchAI(prompt, inferenceToken){
